@@ -1,129 +1,342 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
-@import "shadcn-svelte/tailwind.css";
-@import "@fontsource-variable/inter";
+@import 'tw-animate-css';
+@import 'shadcn-svelte/tailwind.css';
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/dm-sans';
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
-	--background: oklch(1 0 0);
-	--foreground: oklch(0.145 0 0);
-	--card: oklch(1 0 0);
-	--card-foreground: oklch(0.145 0 0);
-	--popover: oklch(1 0 0);
-	--popover-foreground: oklch(0.145 0 0);
-	--primary: oklch(0.205 0 0);
-	--primary-foreground: oklch(0.985 0 0);
-	--secondary: oklch(0.97 0 0);
-	--secondary-foreground: oklch(0.205 0 0);
-	--muted: oklch(0.97 0 0);
-	--muted-foreground: oklch(0.556 0 0);
-	--accent: oklch(0.97 0 0);
-	--accent-foreground: oklch(0.205 0 0);
-	--destructive: oklch(0.577 0.245 27.325);
-	--border: oklch(0.922 0 0);
-	--input: oklch(0.922 0 0);
-	--ring: oklch(0.708 0 0);
-	--chart-1: oklch(0.87 0 0);
-	--chart-2: oklch(0.556 0 0);
-	--chart-3: oklch(0.439 0 0);
-	--chart-4: oklch(0.371 0 0);
-	--chart-5: oklch(0.269 0 0);
-	--radius: 0.625rem;
-	--sidebar: oklch(0.985 0 0);
-	--sidebar-foreground: oklch(0.145 0 0);
-	--sidebar-primary: oklch(0.205 0 0);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.97 0 0);
-	--sidebar-accent-foreground: oklch(0.205 0 0);
-	--sidebar-border: oklch(0.922 0 0);
-	--sidebar-ring: oklch(0.708 0 0);
+/*
+ * Meadow tokens.
+ *
+ * Every palette is five brand colours: paper (the page), two tints (block-a is
+ * the warm one, block-b the cool one), ink (one dark colour that does all the
+ * work: text, hairlines, buttons, the dark card) and ink-soft (secondary text).
+ * Semantic tokens below map those onto the shadcn names, so components only
+ * ever use semantic tokens. Dark mode inverts the roles: ink becomes the page,
+ * block-a becomes primary, block-b darkens into the accent surface.
+ *
+ * Palettes are selected with `data-theme` on <html> (mode-watcher sets it;
+ * the default, Meadow, needs no attribute). See AGENTS.md > Design.
+ */
+
+/* ------------------------------------------------------------------ Meadow */
+:root,
+[data-theme='meadow'] {
+	--paper: oklch(0.983 0.011 106.6);
+	--block-a: oklch(0.924 0.074 110.3);
+	--block-b: oklch(0.88 0.03 305.1);
+	--ink: oklch(0.383 0.064 170.3);
+	--ink-soft: oklch(0.443 0.036 169.7);
+	--paper-deep: oklch(0.949 0.016 106.7);
+}
+.dark {
+	--paper: oklch(0.947 0.034 110.6);
+	--block-a: oklch(0.924 0.074 110.3);
+	--block-b: oklch(0.346 0.052 294.2);
+	--block-b-foreground: oklch(0.942 0.017 308.3);
+	--ink: oklch(0.264 0.038 169.7);
+	--ink-soft: oklch(0.819 0.025 159);
+	--ink-raised: oklch(0.318 0.047 171);
+	--ink-mid: oklch(0.359 0.054 169.1);
+	--ink-on-block: oklch(0.383 0.064 170.3);
 }
 
+/* ----------------------------------------------------------------- Orchard */
+[data-theme='orchard'] {
+	--paper: oklch(0.985 0.012 80);
+	--block-a: oklch(0.915 0.072 62);
+	--block-b: oklch(0.905 0.045 140);
+	--ink: oklch(0.345 0.085 340);
+	--ink-soft: oklch(0.43 0.05 340);
+	--paper-deep: oklch(0.952 0.02 80);
+}
+.dark[data-theme='orchard'] {
+	--paper: oklch(0.955 0.03 80);
+	--block-a: oklch(0.915 0.072 62);
+	--block-b: oklch(0.34 0.045 140);
+	--block-b-foreground: oklch(0.94 0.025 140);
+	--ink: oklch(0.245 0.05 340);
+	--ink-soft: oklch(0.83 0.035 345);
+	--ink-raised: oklch(0.3 0.06 340);
+	--ink-mid: oklch(0.345 0.07 340);
+	--ink-on-block: oklch(0.345 0.085 340);
+}
+
+/* ------------------------------------------------------------------- Shore */
+[data-theme='shore'] {
+	--paper: oklch(0.985 0.006 220);
+	--block-a: oklch(0.93 0.05 85);
+	--block-b: oklch(0.9 0.04 232);
+	--ink: oklch(0.34 0.06 235);
+	--ink-soft: oklch(0.43 0.04 235);
+	--paper-deep: oklch(0.952 0.012 220);
+}
+.dark[data-theme='shore'] {
+	--paper: oklch(0.95 0.02 90);
+	--block-a: oklch(0.93 0.05 85);
+	--block-b: oklch(0.36 0.06 240);
+	--block-b-foreground: oklch(0.94 0.02 235);
+	--ink: oklch(0.245 0.04 235);
+	--ink-soft: oklch(0.82 0.03 225);
+	--ink-raised: oklch(0.3 0.05 235);
+	--ink-mid: oklch(0.345 0.06 235);
+	--ink-on-block: oklch(0.34 0.06 235);
+}
+
+/* -------------------------------------------------------------------- Clay */
+[data-theme='clay'] {
+	--paper: oklch(0.98 0.01 70);
+	--block-a: oklch(0.9 0.07 42);
+	--block-b: oklch(0.91 0.028 160);
+	--ink: oklch(0.33 0.045 50);
+	--ink-soft: oklch(0.43 0.03 50);
+	--paper-deep: oklch(0.948 0.018 70);
+}
+.dark[data-theme='clay'] {
+	--paper: oklch(0.95 0.025 70);
+	--block-a: oklch(0.9 0.07 42);
+	--block-b: oklch(0.35 0.035 160);
+	--block-b-foreground: oklch(0.94 0.02 160);
+	--ink: oklch(0.24 0.028 50);
+	--ink-soft: oklch(0.82 0.03 60);
+	--ink-raised: oklch(0.295 0.035 50);
+	--ink-mid: oklch(0.34 0.04 50);
+	--ink-on-block: oklch(0.33 0.045 50);
+}
+
+/* --------------------------------------------------------- Semantic (light) */
+:root {
+	--background: var(--paper);
+	--foreground: var(--ink);
+	--card: var(--paper);
+	--card-foreground: var(--ink);
+	--popover: var(--paper);
+	--popover-foreground: var(--ink);
+	--primary: var(--ink);
+	--primary-foreground: var(--block-a);
+	--secondary: var(--block-a);
+	--secondary-foreground: var(--ink);
+	--accent: var(--block-b);
+	--accent-foreground: var(--ink);
+	--muted: var(--paper-deep);
+	--muted-foreground: var(--ink-soft);
+	--destructive: oklch(0.55 0.2 27);
+	--destructive-foreground: oklch(0.985 0.011 106.6);
+	--border: var(--ink);
+	--input: var(--ink);
+	--ring: var(--ink);
+	--overlay: color-mix(in oklab, var(--ink) 40%, transparent);
+	/* Light series, in contrast order on paper: ink, cool tint, soft ink, warm tint, deep paper. */
+	--chart-1: var(--ink);
+	--chart-2: var(--block-b);
+	--chart-3: var(--ink-soft);
+	--chart-4: var(--block-a);
+	--chart-5: var(--paper-deep);
+
+	--sidebar: var(--paper);
+	--sidebar-foreground: var(--ink);
+	--sidebar-primary: var(--ink);
+	--sidebar-primary-foreground: var(--block-a);
+	--sidebar-accent: var(--block-a);
+	--sidebar-accent-foreground: var(--ink);
+	--sidebar-border: var(--ink);
+	--sidebar-ring: var(--ink);
+
+	/* Rhythm */
+	--radius: 1.25rem; /* cards */
+	--radius-block: 1.75rem; /* colour blocks */
+
+	/* Strength of a 1px hairline drawn in the current text colour (see `border-hairline`). */
+	--hairline: 100%;
+}
+
+/* ---------------------------------------------------------- Semantic (dark) */
 .dark {
-	--background: oklch(0.145 0 0);
-	--foreground: oklch(0.985 0 0);
-	--card: oklch(0.205 0 0);
-	--card-foreground: oklch(0.985 0 0);
-	--popover: oklch(0.205 0 0);
-	--popover-foreground: oklch(0.985 0 0);
-	--primary: oklch(0.922 0 0);
-	--primary-foreground: oklch(0.205 0 0);
-	--secondary: oklch(0.269 0 0);
-	--secondary-foreground: oklch(0.985 0 0);
-	--muted: oklch(0.269 0 0);
-	--muted-foreground: oklch(0.708 0 0);
-	--accent: oklch(0.269 0 0);
-	--accent-foreground: oklch(0.985 0 0);
-	--destructive: oklch(0.704 0.191 22.216);
-	--border: oklch(1 0 0 / 10%);
-	--input: oklch(1 0 0 / 15%);
-	--ring: oklch(0.556 0 0);
-	--chart-1: oklch(0.87 0 0);
-	--chart-2: oklch(0.556 0 0);
-	--chart-3: oklch(0.439 0 0);
-	--chart-4: oklch(0.371 0 0);
-	--chart-5: oklch(0.269 0 0);
-	--sidebar: oklch(0.205 0 0);
-	--sidebar-foreground: oklch(0.985 0 0);
-	--sidebar-primary: oklch(0.488 0.243 264.376);
-	--sidebar-primary-foreground: oklch(0.985 0 0);
-	--sidebar-accent: oklch(0.269 0 0);
-	--sidebar-accent-foreground: oklch(0.985 0 0);
-	--sidebar-border: oklch(1 0 0 / 10%);
-	--sidebar-ring: oklch(0.556 0 0);
+	--background: var(--ink);
+	--foreground: var(--paper);
+	--card: var(--ink-raised);
+	--card-foreground: var(--paper);
+	--popover: var(--ink-raised);
+	--popover-foreground: var(--paper);
+	--primary: var(--block-a);
+	--primary-foreground: var(--ink-on-block);
+	--secondary: var(--ink-mid);
+	--secondary-foreground: var(--paper);
+	--accent: var(--block-b);
+	--accent-foreground: var(--block-b-foreground);
+	--muted: var(--ink-mid);
+	--muted-foreground: var(--ink-soft);
+	--destructive: oklch(0.72 0.17 22);
+	--destructive-foreground: oklch(0.2 0.04 22);
+	--border: color-mix(in oklab, var(--block-a) 45%, transparent);
+	--input: color-mix(in oklab, var(--block-a) 45%, transparent);
+	--ring: var(--block-a);
+	--overlay: oklch(0 0 0 / 55%);
+	/* Dark series must all read on the ink page and apart from each other:
+	   warm tint, soft ink, dimmed cool tint, dimmed warm tint, mid ink. */
+	--chart-1: var(--block-a);
+	--chart-2: var(--ink-soft);
+	--chart-3: color-mix(in oklab, var(--block-b-foreground) 65%, var(--ink));
+	--chart-4: color-mix(in oklab, var(--block-a) 45%, var(--ink));
+	--chart-5: var(--ink-mid);
+
+	--sidebar: var(--ink-raised);
+	--sidebar-foreground: var(--paper);
+	--sidebar-primary: var(--block-a);
+	--sidebar-primary-foreground: var(--ink-on-block);
+	--sidebar-accent: var(--ink-mid);
+	--sidebar-accent-foreground: var(--paper);
+	--sidebar-border: color-mix(in oklab, var(--block-a) 45%, transparent);
+	--sidebar-ring: var(--block-a);
+
+	--hairline: 45%;
+}
+
+/*
+ * A 1px line in the current text colour, so it works on every surface, at
+ * the same strength as the `border` token (full in light, 45% in dark).
+ * Use it instead of `border-current` for hairlines; keep `border-current`
+ * for the 2px outlines on buttons, toggles and switches.
+ */
+@utility border-hairline {
+	border-color: color-mix(in oklab, currentColor var(--hairline), transparent);
+}
+@utility divide-hairline {
+	:where(& > :not(:last-child)) {
+		border-color: color-mix(in oklab, currentColor var(--hairline), transparent);
+	}
 }
 
 @theme inline {
-	--font-sans: 'Inter Variable', sans-serif;
-	--color-sidebar-ring: var(--sidebar-ring);
-	--color-sidebar-border: var(--sidebar-border);
-	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-	--color-sidebar-accent: var(--sidebar-accent);
-	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-	--color-sidebar-primary: var(--sidebar-primary);
-	--color-sidebar-foreground: var(--sidebar-foreground);
-	--color-sidebar: var(--sidebar);
-	--color-chart-5: var(--chart-5);
-	--color-chart-4: var(--chart-4);
-	--color-chart-3: var(--chart-3);
-	--color-chart-2: var(--chart-2);
-	--color-chart-1: var(--chart-1);
-	--color-ring: var(--ring);
-	--color-input: var(--input);
-	--color-border: var(--border);
-	--color-destructive: var(--destructive);
-	--color-accent-foreground: var(--accent-foreground);
-	--color-accent: var(--accent);
-	--color-muted-foreground: var(--muted-foreground);
-	--color-muted: var(--muted);
-	--color-secondary-foreground: var(--secondary-foreground);
-	--color-secondary: var(--secondary);
-	--color-primary-foreground: var(--primary-foreground);
-	--color-primary: var(--primary);
-	--color-popover-foreground: var(--popover-foreground);
-	--color-popover: var(--popover);
-	--color-card-foreground: var(--card-foreground);
-	--color-card: var(--card);
-	--color-foreground: var(--foreground);
+	--font-sans: 'DM Sans Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+
 	--color-background: var(--background);
-	--radius-sm: calc(var(--radius) * 0.6);
-	--radius-md: calc(var(--radius) * 0.8);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-overlay: var(--overlay);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+
+	/* Brand colours, for the few places that need a block colour regardless of
+	   its semantic role (the palette picker swatches, the styles page). */
+	--color-paper: var(--paper);
+	--color-block-a: var(--block-a);
+	--color-block-b: var(--block-b);
+	--color-ink: var(--ink);
+
+	--radius-xs: calc(var(--radius) * 0.3);
+	--radius-sm: calc(var(--radius) * 0.4);
+	--radius-md: calc(var(--radius) * 0.6);
 	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) * 1.4);
-	--radius-2xl: calc(var(--radius) * 1.8);
-	--radius-3xl: calc(var(--radius) * 2.2);
-	--radius-4xl: calc(var(--radius) * 2.6);
+	--radius-xl: var(--radius-block);
+	--radius-2xl: calc(var(--radius-block) * 1.25);
+	--radius-3xl: calc(var(--radius-block) * 1.5);
+	--radius-4xl: calc(var(--radius-block) * 1.75);
+	--radius-card: var(--radius);
+	--radius-block: var(--radius-block);
+}
+
+/* Page gutter: 20px on phones, 64px from md up, 1440px max. */
+@utility wrap {
+	margin-inline: auto;
+	width: 100%;
+	max-width: 90rem;
+	padding-inline: 1.25rem;
+	@media (width >= 48rem) {
+		padding-inline: 4rem;
+	}
+}
+
+/* Section rhythm: 64px on phones, 112px on desktop. */
+@utility section-gap {
+	margin-top: 4rem;
+	@media (width >= 48rem) {
+		margin-top: 7rem;
+	}
 }
 
 @layer base {
 	* {
 		@apply border-border outline-ring/50;
 	}
+	html {
+		@apply font-sans antialiased;
+		scroll-padding-top: 6rem;
+	}
 	body {
 		@apply bg-background text-foreground;
 	}
-	html {
-		@apply font-sans;
+	::selection {
+		@apply bg-accent text-accent-foreground;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		::before,
+		::after {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+			scroll-behavior: auto !important;
+		}
+	}
+}
+
+@layer components {
+	/* Display type: plain Manrope 800, tight tracking, sentence case. */
+	.display-1 {
+		@apply font-display text-[3.75rem] leading-[0.95] font-extrabold tracking-[-0.04em] text-balance md:text-[6.5rem];
+	}
+	.display-2 {
+		@apply font-display text-[2.375rem] leading-none font-extrabold tracking-[-0.04em] text-balance md:text-[3.5rem];
+	}
+	.display-3 {
+		@apply font-display text-[1.625rem] leading-[1.1] font-extrabold tracking-[-0.03em] text-balance;
+	}
+	.display-4 {
+		@apply font-display text-xl leading-tight font-extrabold tracking-[-0.02em];
+	}
+	/* Row title inside hairline lists. */
+	.row-title {
+		@apply font-display text-lg leading-tight font-extrabold tracking-[-0.02em] md:text-3xl md:tracking-[-0.03em];
+	}
+	.lead {
+		@apply text-base leading-normal md:text-lg;
+	}
+	/* Big figure (pricing, stats). */
+	.figure {
+		@apply font-display text-[2.5rem] leading-none font-extrabold tracking-[-0.04em] md:text-[3rem];
+	}
+	/* Text link: bold, 2px underline, no colour change. */
+	.text-link {
+		@apply rounded-xs font-display font-bold underline decoration-2 underline-offset-4 outline-none hover:opacity-80 focus-visible:ring-3 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
 	}
 }

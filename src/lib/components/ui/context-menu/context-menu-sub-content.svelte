@@ -1,0 +1,31 @@
+<script lang="ts">
+	import { ContextMenu as ContextMenuPrimitive } from "bits-ui";
+	import { cn, type WithoutChildrenOrChild } from "#lib/utils.js";
+	import ContextMenuPortal from "./context-menu-portal.svelte";
+	import type { ComponentProps } from "svelte";
+
+	let {
+		ref = $bindable(null),
+		class: className,
+		align = "start",
+		alignOffset = -3,
+		portalProps,
+		...restProps
+	}: ContextMenuPrimitive.SubContentProps & {
+		portalProps?: WithoutChildrenOrChild<ComponentProps<typeof ContextMenuPortal>>;
+	} = $props();
+</script>
+
+<ContextMenuPortal {...portalProps}>
+	<ContextMenuPrimitive.SubContent
+		bind:ref
+		data-slot="context-menu-sub-content"
+		{align}
+		{alignOffset}
+		class={cn(
+			"z-50 rounded-lg border bg-popover p-1.5 text-popover-foreground min-w-44 overflow-hidden duration-200 ease-out data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--bits-context-menu-content-transform-origin)",
+			className
+		)}
+		{...restProps}
+	/>
+</ContextMenuPortal>
