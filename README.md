@@ -1,5 +1,7 @@
 # meadow-design-svelte
 
+**Showcase: [meadow-design-svelte.vercel.app](https://meadow-design-svelte.vercel.app/)**
+
 Meadow: a design system on top of shadcn-svelte, and a showcase site for it. Warm paper, two soft colour blocks, one ink colour, pill buttons, hairline lists. Four named palettes, each with light and dark. Every shadcn-svelte component is installed and restyled.
 
 - `/` landing page
