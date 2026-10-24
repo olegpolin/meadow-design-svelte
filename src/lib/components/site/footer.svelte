@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { Button } from '#lib/components/ui/button/index.js';
+	import ArrowUpRightIcon from '@lucide/svelte/icons/arrow-up-right';
 	import Wordmark from './wordmark.svelte';
 	import ThemeControls from './theme-controls.svelte';
+	import { site } from '#lib/config/site.js';
 
 	const year = new Date().getFullYear();
 </script>
@@ -19,7 +21,10 @@
 			</p>
 			<div class="mt-7 flex flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-4">
 				<Button href="/components" variant="secondary">Browse the components</Button>
-				<Button href="/styles" variant="outline">See the tokens</Button>
+				<Button href={site.repo} variant="outline" target="_blank" rel="noopener">
+					Source on GitHub
+					<ArrowUpRightIcon data-icon="inline-end" aria-hidden="true" />
+				</Button>
 			</div>
 		</div>
 		<div class="flex flex-col justify-between gap-8 md:items-end md:text-right">

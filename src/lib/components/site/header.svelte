@@ -2,8 +2,10 @@
 	import { page } from '$app/state';
 	import * as Popover from '#lib/components/ui/popover/index.js';
 	import { buttonVariants } from '#lib/components/ui/button/index.js';
+	import ArrowUpRightIcon from '@lucide/svelte/icons/arrow-up-right';
 	import Wordmark from './wordmark.svelte';
 	import ThemeControls from './theme-controls.svelte';
+	import { site } from '#lib/config/site.js';
 	import { cn } from '#lib/utils.js';
 
 	const navLinks = [
@@ -41,6 +43,15 @@
 					{title}
 				</a>
 			{/each}
+			<a
+				href={site.repo}
+				target="_blank"
+				rel="noopener"
+				class={cn('inline-flex items-center gap-1 decoration-2 underline-offset-[6px] hover:underline', focusRing)}
+			>
+				GitHub
+				<ArrowUpRightIcon class="size-4" aria-hidden="true" />
+			</a>
 		</nav>
 
 		<div class="flex items-center gap-2">
@@ -92,6 +103,20 @@
 									</a>
 								</li>
 							{/each}
+							<li>
+								<a
+									href={site.repo}
+									target="_blank"
+									rel="noopener"
+									class={cn(
+										'inline-flex items-center gap-2 font-display text-[2.375rem] leading-none font-extrabold tracking-[-0.04em] active:opacity-60',
+										focusRing
+									)}
+								>
+									GitHub
+									<ArrowUpRightIcon class="size-8" aria-hidden="true" />
+								</a>
+							</li>
 						</ul>
 						<div class="mt-auto border-t pt-6">
 							<ThemeControls />
