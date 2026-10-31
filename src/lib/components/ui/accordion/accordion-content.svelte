@@ -18,7 +18,7 @@
 >
 	<div
 		class={cn(
-			"max-w-[42rem] pr-9 pb-6 leading-normal text-muted-foreground [&_a]:font-bold [&_a]:underline [&_a]:decoration-2 [&_a]:underline-offset-4 [&_a]:hover:opacity-80 [&_p:not(:last-child)]:mb-3",
+			"max-w-[42rem] pr-9 pb-6 leading-normal text-current/75 [&_a]:font-bold [&_a]:underline [&_a]:decoration-2 [&_a]:underline-offset-4 [&_a]:hover:opacity-80 [&_p:not(:last-child)]:mb-3",
 			className
 		)}
 	>

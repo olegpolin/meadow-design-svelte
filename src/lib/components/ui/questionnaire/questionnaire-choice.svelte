@@ -54,6 +54,7 @@
 	</QuestionnairePrimitive.ChoiceLabel>
 	<QuestionnairePrimitive.ChoiceShortcut
 		data-slot="questionnaire-choice-shortcut"
-		class="pointer-events-none ms-auto hidden h-6 min-w-6 shrink-0 items-center justify-center rounded-xs border border-current/50 px-1.5 font-sans text-xs font-medium leading-none group-data-[shortcut]/questionnaire-choice:inline-flex"
+		class="pointer-events-none ms-auto hidden h-6 min-w-6 shrink-0 items-center justify-center rounded-xs border border-hairline px-1.5 font-sans text-xs font-medium leading-none group-data-[shortcut]
+/questionnaire-choice:inline-flex"
 	/>
 </QuestionnairePrimitive.Choice>

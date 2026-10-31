@@ -149,10 +149,12 @@ export const TRADE_TERMS_DAYS = 14;
 
 /* ------------------------------------------------------------- Formatting */
 
+/** Adds calendar days to an ISO date, in local time (no UTC round trip, so it holds east of UTC+12). */
 export const addDays = (iso: string, days: number) => {
 	const d = new Date(`${iso}T12:00:00`);
 	d.setDate(d.getDate() + days);
-	return d.toISOString().slice(0, 10);
+	const pad = (n: number) => String(n).padStart(2, '0');
+	return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
 };
 
 export const TOMORROW = addDays(TODAY, 1);

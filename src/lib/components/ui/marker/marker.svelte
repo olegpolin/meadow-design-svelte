@@ -12,7 +12,7 @@
 		variants: {
 			variant: {
 				default: "w-fit rounded-full bg-accent px-3 py-1 font-medium text-accent-foreground [a,button]:hover:bg-accent/75",
-				separator: "text-xs before:me-1 before:h-px before:min-w-0 before:flex-1 before:bg-current after:ms-1 after:h-px after:min-w-0 after:flex-1 after:bg-current",
+				separator: "text-xs before:me-1 before:h-px before:min-w-0 before:flex-1 before:bg-hairline after:ms-1 after:h-px after:min-w-0 after:flex-1 after:bg-hairline",
 				border: "border-b border-hairline pb-2 text-current/75 [a,button]:hover:text-current",
 			},
 		},

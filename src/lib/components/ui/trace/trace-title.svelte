@@ -13,7 +13,7 @@
 <span
 	bind:this={ref}
 	data-slot="trace-title"
-	class={cn("min-w-0 truncate font-display font-bold motion-reduce:shimmer-none", className)}
+	class={cn("min-w-0 truncate font-display font-bold", className)}
 	{...restProps}
 >
 	{@render children?.()}

@@ -76,7 +76,7 @@
 		spacing={1}
 		size="sm"
 		aria-label="Colour mode"
-		class="rounded-full border border-current/30 p-0.5"
+		class="rounded-full border border-hairline p-0.5"
 		bind:value={
 			() => userPrefersMode.current,
 			(value) => {

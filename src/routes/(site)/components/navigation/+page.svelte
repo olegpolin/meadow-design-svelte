@@ -198,7 +198,7 @@
 					{#each statuses as status (status)}
 						<Tabs.Trigger value={status}>
 							{status}
-							<span class="tabular-nums opacity-70">{orders.filter((o) => o.status === status).length}</span>
+							<span class="tabular-nums">{orders.filter((o) => o.status === status).length}</span>
 						</Tabs.Trigger>
 					{/each}
 				</Tabs.List>
@@ -245,7 +245,7 @@
 
 		<Demo label="Next van runs, on the ink card" tone="ink" layout="block">
 			<Tabs.Root bind:value={runTab}>
-				<Tabs.List>
+				<Tabs.List variant="line">
 					{#each delivery.nextRuns as date (date)}
 						<Tabs.Trigger value={date}>{formatLongDate(date).split(',')[0]}</Tabs.Trigger>
 					{/each}

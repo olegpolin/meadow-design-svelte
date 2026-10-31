@@ -33,8 +33,10 @@
 		orderItems,
 		orderSubtotal,
 		orders,
+		extras,
 		plantList,
 		plants,
+		roseTrade,
 		staff,
 		staffList,
 		stockState,
@@ -167,11 +169,8 @@
 	let showOutOfStock = $state(false);
 
 	// Slider
-	// Trade price for bare-root roses, from 24 roses.
-	const ROSE_TRADE_FROM = 24;
-	const ROSE_TRADE_PRICE = 19.5;
 	let roses = $state(14);
-	const roseUnit = $derived(roses >= ROSE_TRADE_FROM ? ROSE_TRADE_PRICE : plants.rose.price);
+	const roseUnit = $derived(roses >= roseTrade.from ? roseTrade.each : plants.rose.price);
 	const prices = plantList.map((p) => p.price);
 	const priceMin = Math.floor(Math.min(...prices));
 	const priceMax = Math.ceil(Math.max(...prices));
@@ -328,7 +327,7 @@
 							<Field.FieldContent>
 								<Field.FieldTitle>Van 1 with Priya, {formatLongDate(delivery.nextRuns[0])}</Field.FieldTitle>
 								<Field.FieldDescription>
-									Morning run, {delivery.slots[0].window}. {rosaFee ? formatMoney(rosaFee) : `Free over $${delivery.freeOver}`}
+									Morning run, {delivery.slots[0].window}. {rosaFee ? formatMoney(rosaFee) : `Free from ${formatMoney(delivery.freeOver)}`}
 								</Field.FieldDescription>
 							</Field.FieldContent>
 							<RadioGroup.Item value="van" id="choice-van" />
@@ -590,6 +589,7 @@
 					<NativeSelectOption value="6">6 cells</NativeSelectOption>
 					<NativeSelectOption value="15">15 cells</NativeSelectOption>
 				</NativeSelect>
+				<Field.FieldError>Pick a tray size before the order goes to the bench.</Field.FieldError>
 			</Field.Field>
 			<Field.Field data-disabled class="w-auto">
 				<Field.FieldLabel for="native-region">Delivery area</Field.FieldLabel>
@@ -681,6 +681,9 @@
 						</Select.Group>
 					</Select.Content>
 				</Select.Root>
+				{#if !traySize}
+					<Field.FieldError>Pick a tray size before the order goes to the bench.</Field.FieldError>
+				{/if}
 			</Field.Field>
 			<Field.Field data-disabled class="w-auto">
 				<Field.FieldLabel for="select-season">Season</Field.FieldLabel>
@@ -754,7 +757,7 @@
 				<Field.Field orientation="horizontal" data-disabled>
 					<Checkbox id="gift-wrap" disabled />
 					<Field.FieldContent>
-						<Field.FieldLabel for="gift-wrap">Gift wrap, $3.40</Field.FieldLabel>
+						<Field.FieldLabel for="gift-wrap">{extras.giftWrap.name}, {formatMoney(extras.giftWrap.price)}</Field.FieldLabel>
 						<Field.FieldDescription>Out of paper until {formatLongDate(delivery.nextRuns[1])}.</Field.FieldDescription>
 					</Field.FieldContent>
 				</Field.Field>
@@ -875,7 +878,7 @@
 				<Slider type="single" min={1} max={48} step={1} bind:value={roses} />
 				<Field.FieldDescription class="tabular-nums">
 					{plants.rose.name}, {formatMoney(roseUnit)} each, {formatMoney(roseUnit * roses)} in all. Trade price from
-					{ROSE_TRADE_FROM} roses: {formatMoney(ROSE_TRADE_PRICE)} each.
+					{roseTrade.from} roses: {formatMoney(roseTrade.each)} each.
 				</Field.FieldDescription>
 			</Field.Field>
 		</Demo>

@@ -200,8 +200,8 @@
 			</Select.Root>
 			<Field.FieldDescription>
 				Vans go out on {runDays}, within {delivery.radiusMiles} miles.
-				Delivery is {formatMoney(delivery.fee)} on orders under ${delivery.freeOver} and free
-				over.
+				Delivery is {formatMoney(delivery.fee)} on orders under {formatMoney(delivery.freeOver)} and
+				free from there up.
 			</Field.FieldDescription>
 			<Field.FieldError errors={issue('fulfilment')} />
 		</Field.Field>

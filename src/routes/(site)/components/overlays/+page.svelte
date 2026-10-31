@@ -546,7 +546,7 @@
 						<div class="flex min-w-0 flex-col gap-1">
 							<p class="font-display font-bold">{staff.nell.name}</p>
 							<p class="text-sm text-muted-foreground">{staff.nell.role}</p>
-							<p class="mt-2 text-sm">In the shop until close at 5:00 PM. Signs off any refund over $50.00.</p>
+							<p class="mt-2 text-sm">In the shop until close at 5:00 PM. Signs off any refund over {formatMoney(shop.refundSignOff)}.</p>
 							<p class="truncate text-sm text-muted-foreground">{staff.nell.email}</p>
 						</div>
 					</HoverCard.Content></HoverCard.Root>.

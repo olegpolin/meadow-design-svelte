@@ -8,6 +8,9 @@
 	import { Button } from '#lib/components/ui/button/index.js';
 	import * as Kbd from '#lib/components/ui/kbd/index.js';
 	import { delivery, formatMoney, shop as hollin, shortcuts, staff, weather } from '#lib/demos/world.js';
+	import { getShop } from '#lib/components/dashboard/shop.svelte.js';
+
+	const shop = getShop();
 
 	type ShopSettings = {
 		name: string;
@@ -25,6 +28,8 @@
 		radius: string;
 		days: string[];
 		slots: string[];
+		frostAlerts: boolean;
+		stockEmails: boolean;
 	};
 
 	/* What was last saved, so "Undo changes" has somewhere to go back to. Starts from the world module. */
@@ -42,13 +47,13 @@
 		freeOver: delivery.freeOver,
 		radius: String(delivery.radiusMiles),
 		days: [...delivery.days],
-		slots: delivery.slots.map((s) => s.id)
+		slots: delivery.slots.map((s) => s.id),
+		frostAlerts: shop.alerts.frost,
+		stockEmails: shop.alerts.stockEmail
 	};
 
 	let form = $state<ShopSettings>(structuredClone(saved));
 	let tried = $state(false);
-	let frostAlerts = $state(true);
-	let stockEmails = $state(true);
 	let formEl = $state<HTMLFormElement | null>(null);
 
 	/* Ctrl S saves, as everywhere in the shop admin. */
@@ -86,6 +91,8 @@
 		}
 		tried = false;
 		saved = $state.snapshot(form);
+		shop.alerts.frost = saved.frostAlerts;
+		shop.alerts.stockEmail = saved.stockEmails;
 		toast.success('Settings saved', { description: 'Receipts and the website use them from the next order.' });
 	}
 </script>
@@ -241,14 +248,14 @@
 							From {weather.source}, when it drops below 32°F overnight.
 						</Field.Description>
 					</Field.Content>
-					<Switch id="set-frost" bind:checked={frostAlerts} />
+					<Switch id="set-frost" bind:checked={form.frostAlerts} />
 				</Field.Field>
 				<Field.Field orientation="horizontal">
 					<Field.Content>
 						<Field.Label for="set-stock">Low stock email to {staff.tomasz.name.split(' ')[0]}</Field.Label>
 						<Field.Description>Every Tuesday at 7:00 AM, with a reorder list he can forward.</Field.Description>
 					</Field.Content>
-					<Switch id="set-stock" bind:checked={stockEmails} />
+					<Switch id="set-stock" bind:checked={form.stockEmails} />
 				</Field.Field>
 			</Field.Group>
 		</Field.Set>

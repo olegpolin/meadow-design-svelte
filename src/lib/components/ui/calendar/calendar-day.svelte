@@ -26,6 +26,7 @@
 		"data-outside-month:opacity-50",
 		// Selected
 		"data-selected:border-transparent data-selected:bg-primary data-selected:font-semibold data-selected:text-primary-foreground data-selected:opacity-100 data-selected:hover:bg-primary/90",
+		"[.bg-primary_&]:data-selected:bg-primary-foreground [.bg-primary_&]:data-selected:text-primary [.bg-primary_&]:data-selected:hover:bg-primary-foreground/90",
 		// Disabled
 		"data-disabled:pointer-events-none data-disabled:opacity-40",
 		// Unavailable

@@ -146,7 +146,7 @@
 		state: 'done' | 'uploading' | 'error';
 	};
 	const startingFiles: FileRow[] = [
-		{ id: 'invoice', name: 'invoice-4471.pdf', detail: 'PDF, 84 KB', kind: 'pdf', state: 'done' },
+		{ id: 'invoice', name: `invoice-${roses.id.slice(1)}.pdf`, detail: 'PDF, 84 KB', kind: 'pdf', state: 'done' },
 		{ id: 'guide', name: 'planting-bare-root-roses.pdf', detail: 'PDF, 1.2 MB', kind: 'pdf', state: 'done' },
 		{ id: 'photo', name: 'rose-bed-under-leaves.jpg', detail: 'Uploading, 3.1 of 4.8 MB', kind: 'image', state: 'uploading' },
 		{ id: 'soil', name: 'soil-test-results.xlsx', detail: 'Over the 10 MB limit', kind: 'sheet', state: 'error' }
@@ -232,7 +232,7 @@ npm run dev -- --open`;
 	const steps: { id: StepId; label: Record<StepState, string>; took: string }[] = [
 		{
 			id: 'lookup',
-			label: { pending: 'Look up order #4471', running: 'Looking up order #4471', done: 'Looked up order #4471' },
+			label: { pending: `Look up order ${roses.id}`, running: `Looking up order ${roses.id}`, done: `Looked up order ${roses.id}` },
 			took: '0.8s'
 		},
 		{
@@ -292,8 +292,8 @@ npm run dev -- --open`;
 	}
 
 	/* --------------------------------------------------------- Questionnaire */
-	/* The three van runs after Saturday. */
-	const runDays = ['2026-10-27', '2026-10-29', '2026-10-31'].map((date) => ({
+	/* The next three van runs. */
+	const runDays = delivery.nextRuns.map((date) => ({
 		value: date,
 		label: formatLongDate(date),
 		booked: orders.filter((o) => o.due === date && o.van === 'Van 1').length
@@ -794,7 +794,7 @@ npm run dev -- --open`;
 			</Marker.Root>
 			<Marker.Root>
 				<Marker.Icon><CheckIcon /></Marker.Icon>
-				<Marker.Content>Delivered to the shed at {formatTime(`${foxgloves.due}T14:42:00`)}</Marker.Content>
+				<Marker.Content>Priya will leave it by the shed if nobody is in</Marker.Content>
 			</Marker.Root>
 		</Demo>
 	</Section>
@@ -875,7 +875,7 @@ npm run dev -- --open`;
 			<Trace.Root>
 				<Trace.Line>
 					{@render stepIcon('done')}
-					<Trace.Title>Looked up order #4479</Trace.Title>
+					<Trace.Title>Looked up order {order('#4479').id}</Trace.Title>
 					<Trace.Description>Done, 0.6s</Trace.Description>
 				</Trace.Line>
 				<Trace.Line status={stockCheck === 'done' ? undefined : stockCheck}>

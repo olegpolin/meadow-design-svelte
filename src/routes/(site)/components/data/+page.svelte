@@ -205,7 +205,7 @@
 	<Section
 		id="data-table"
 		title="Data table"
-		description="A table people work in: sort by a column, search, select rows and page through. Built with runes state, no table library."
+		description="A table people work in: sort by a column, search, select rows and page through. The DataTable component on TanStack Table; the column definitions are the whole recipe."
 	>
 		<Demo label="October orders" layout="block">
 			<OrdersDataTable />
