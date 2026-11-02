@@ -18,7 +18,7 @@
 			variant: {
 				default: "",
 				outline: "rounded-lg border border-hairline before:inset-0 before:rounded-[inherit]",
-				muted: "rounded-lg bg-muted text-foreground before:inset-0 before:rounded-[inherit]",
+				muted: "rounded-lg bg-current/10 before:inset-0 before:rounded-[inherit]",
 			},
 			size: {
 				default: "gap-4 px-3 py-4",

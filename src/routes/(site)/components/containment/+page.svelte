@@ -452,7 +452,7 @@
 			<Separator />
 			<dl class="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm tabular-nums">
 				<dt>Till</dt>
-				<dd class="text-right">$1,912.40</dd>
+				<dd class="text-right">{formatMoney(shop.tillToday)}</dd>
 				<dt>Online orders</dt>
 				<dd class="text-right">{placedToday.length}, {formatMoney(onlineToday)}</dd>
 				<dt>Refunds</dt>

@@ -29,6 +29,8 @@
 		// Range ends
 		"data-range-start:border-transparent data-range-start:bg-primary data-range-start:font-semibold data-range-start:text-primary-foreground data-range-start:hover:bg-primary/90",
 		"data-range-end:border-transparent data-range-end:bg-primary data-range-end:font-semibold data-range-end:text-primary-foreground data-range-end:hover:bg-primary/90",
+		"[.bg-primary_&]:data-range-start:bg-primary-foreground [.bg-primary_&]:data-range-start:text-primary [.bg-primary_&]:data-range-start:hover:bg-primary-foreground/90",
+		"[.bg-primary_&]:data-range-end:bg-primary-foreground [.bg-primary_&]:data-range-end:text-primary [.bg-primary_&]:data-range-end:hover:bg-primary-foreground/90",
 		// Disabled
 		"data-disabled:pointer-events-none data-disabled:opacity-40",
 		// Unavailable

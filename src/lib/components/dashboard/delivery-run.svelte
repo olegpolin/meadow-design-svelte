@@ -47,7 +47,8 @@
 			{@const isDone = shop.isDone(stop)}
 			<Item.Root size="sm" class="px-0" role="listitem">
 				{#snippet child({ props })}
-					<label {...props} class={[props.class as string, 'cursor-pointer', isDone && 'text-current/60']}>
+					<label {...props} class={[props.class as string, 'cursor-pointer', isDone && 'text-current/80'
+]}>
 						<Checkbox
 							checked={isDone}
 							onCheckedChange={(v) => toggle(stop, v)}

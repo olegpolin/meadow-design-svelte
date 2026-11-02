@@ -14,7 +14,7 @@ export const groups: Group[] = [
 	{
 		slug: 'actions',
 		title: 'Actions',
-		description: 'Pill buttons in three sizes, grouped buttons, toggles, badges and keyboard keys.',
+		description: 'Pill buttons in four sizes, grouped buttons, toggles, badges and keyboard keys.',
 		items: ['Button', 'Button group', 'Toggle', 'Toggle group', 'Badge', 'Kbd']
 	},
 	{
@@ -33,13 +33,13 @@ export const groups: Group[] = [
 			'Select',
 			'Combobox',
 			'Command',
+			'Calendar',
+			'Range calendar',
+			'Date picker',
 			'Checkbox',
 			'Radio group',
 			'Switch',
-			'Slider',
-			'Calendar',
-			'Range calendar',
-			'Date picker'
+			'Slider'
 		]
 	},
 	{

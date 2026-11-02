@@ -56,7 +56,9 @@
 		shop.logReturn(id, true);
 		open = false;
 		toast.success(`Return logged for ${id}`, {
-			description: `${formatMoney(orderTotal(order))} to refund to ${order.customer.name}.`,
+			description: order.customer.trade
+				? `The ${formatMoney(orderTotal(order))} invoice to ${order.customer.name} is written off.`
+				: `${formatMoney(orderTotal(order))} to refund to ${order.customer.name}.`,
 			action: { label: 'Undo', onClick: () => shop.logReturn(id, false) }
 		});
 	}
@@ -67,11 +69,12 @@
 		const name = order.customer.name;
 		const was = order.status;
 		const total = orderTotal(order);
+		const trade = order.customer.trade;
 		shop.setStatus(id, 'Cancelled');
 		cancelOpen = false;
 		open = false;
 		toast(`${id} cancelled`, {
-			description: `${formatMoney(total)} refunded to ${name}.`,
+			description: trade ? `${name} will not be invoiced for the ${formatMoney(total)}.` : `${formatMoney(total)} refunded to ${name}.`,
 			action: { label: 'Undo', onClick: () => shop.setStatus(id, was) }
 		});
 	}
@@ -210,7 +213,11 @@
 							<AlertDialog.Header>
 								<AlertDialog.Title>Cancel order {order.id}?</AlertDialog.Title>
 								<AlertDialog.Description>
-									{order.customer.name} gets {formatMoney(orderTotal(order))} back on their card and the plants go back on the bench.
+									{#if order.customer.trade}
+										{order.customer.name} is not invoiced for the {formatMoney(orderTotal(order))} and the plants go back on the bench.
+									{:else}
+										{order.customer.name} gets {formatMoney(orderTotal(order))} back on their card and the plants go back on the bench.
+									{/if}
 								</AlertDialog.Description>
 							</AlertDialog.Header>
 							<AlertDialog.Footer>

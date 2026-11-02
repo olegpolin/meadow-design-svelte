@@ -14,7 +14,7 @@
 		weeklyTakings,
 		weeklyTotal
 	} from '#lib/demos/world.js';
-	import { TRADE_TERMS_DAYS, type ShopOrder } from '#lib/components/dashboard/data.js';
+	import { TRADE_TERMS_DAYS, addDays, type ShopOrder } from '#lib/components/dashboard/data.js';
 	import { getShop } from '#lib/components/dashboard/shop.svelte.js';
 
 	const shop = getShop();
@@ -25,9 +25,7 @@
 	const sum = (weeks: typeof weeklyTakings) => weeks.reduce((s, w) => s + weeklyTotal(w), 0);
 	const octoberSales = sum(october);
 	const change = octoberSales - sum(before);
-	const lastDay = new Date(`${october.at(-1)!.week}T12:00:00`);
-	lastDay.setDate(lastDay.getDate() + 6);
-	const octoberEnd = lastDay.toISOString().slice(0, 10);
+	const octoberEnd = addDays(october.at(-1)!.week, 6);
 
 	const owed = $derived(shop.invoices.reduce((s, i) => s + i.amount, 0));
 	const pending = $derived(shop.toInvoice.reduce((s, o) => s + orderTotal(o), 0));

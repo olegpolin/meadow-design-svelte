@@ -53,13 +53,14 @@
 			if (form.valid) {
 				const { name, email, count, fulfilment } = form.data;
 				const subtotal = count * rose.price;
+				const total = subtotal + (fulfilment === 'deliver' ? deliveryFee(subtotal) : 0);
 				const when =
 					fulfilment === 'deliver'
 						? `Priya delivers them on ${formatLongDate(firstRun)}`
 						: `They are ready at the yard gate from ${arrives}`;
 				setMessage(
 					form,
-					`Reserved ${count} × ${rose.name} for ${name}, ${formatMoney(subtotal)}. ${when}. We will email ${email} when they land.`
+					`Reserved ${count} × ${rose.name} for ${name}, ${formatMoney(total)}. ${when}. We will email ${email} when they land.`
 				);
 			}
 		}
@@ -107,7 +108,7 @@
 				{/snippet}
 			</Form.Control>
 			<Form.Description>
-				Delivery is {formatMoney(delivery.fee)} under ${delivery.freeOver}, free over.
+				Delivery is {formatMoney(delivery.fee)} under {formatMoney(delivery.freeOver)}, free from there up.
 			</Form.Description>
 			<Form.FieldErrors />
 		</Form.Field>

@@ -33,6 +33,8 @@ export class Shop {
 	reminded = $state<string[]>([]);
 	/** Orders packed during this visit, newest first, for the Today page. */
 	packedNow = $state<string[]>([]);
+	/** Alert settings, saved from Settings; Today reads `frost` before it shows the warning. */
+	alerts = $state({ frost: true, stockEmail: true });
 
 	/** Priya's run today: the ledger orders on her van plus the extra stops, in time order. */
 	run = $derived.by(() => {

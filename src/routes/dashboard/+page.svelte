@@ -55,7 +55,7 @@
 </svelte:head>
 
 <div class="flex flex-col gap-6 md:gap-8">
-	{#if !frostHandled}
+	{#if shop.alerts.frost && !frostHandled}
 		<Alert.Root variant="accent">
 			<SnowflakeIcon />
 			<Alert.Title>{frostTitle}</Alert.Title>

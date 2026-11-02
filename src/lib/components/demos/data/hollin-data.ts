@@ -14,11 +14,9 @@ import {
 	orderItems,
 	orderTotal,
 	orders as ledger,
-	plantList,
 	statusBadge,
 	topPlants as worldTopPlants,
 	weeklyTakings,
-	weeklyTotal,
 	type OrderStatus as WorldOrderStatus
 } from '#lib/demos/world.js';
 
@@ -64,24 +62,6 @@ export const invoiceLines = invoiceOrder.lines.map((l) => ({
 }));
 export const invoiceDelivery = orderDeliveryFee(invoiceOrder);
 
-// ------------------------------------------------------------------ stock
-
-export type StockItem = {
-	plant: string;
-	location: string;
-	inStock: number;
-	reserved: number;
-	price: number;
-};
-
-export const stock: StockItem[] = plantList.map((p) => ({
-	plant: p.name,
-	location: p.location,
-	inStock: p.stock,
-	reserved: p.reserved,
-	price: p.price
-}));
-
 // ------------------------------------------------------------------ sales
 
 /** Takings by category for the 12 full weeks before today, each starting on a Monday. */
@@ -92,17 +72,8 @@ export const weeklySales = weeklyTakings.map((w) => ({
 	sundries: w.sundries
 }));
 
-/** Total takings for the same 12 weeks. */
-export const recentTakings = weeklyTakings.map((w) => ({
-	week: toDate(w.week),
-	takings: weeklyTotal(w)
-}));
-
 /** Van runs so far in October (Tuesday, Thursday, Saturday), with the stops made on each. */
 export const deliveryRuns = octoberRuns.map((r) => ({ date: toDate(r.date), stops: r.stops }));
-
-/** @deprecated Old name, kept so nothing breaks: one entry per van run, not per day. */
-export const dailyDeliveries = octoberRuns.map((r) => ({ date: toDate(r.date), deliveries: r.stops }));
 
 /** Units sold so far in October, best first. */
 export const topPlants = worldTopPlants.map((t) => ({ plant: t.plant.name, units: t.units }));

@@ -50,13 +50,23 @@
 		sheetOpen = true;
 	}
 
-	/* ?order=4479 (from Today or the search box) opens that order on arrival. */
+	/*
+	 * ?order=4479 (from Today or the search box) opens that order on arrival.
+	 * A search alone (?q=, from the top bar or a customer's "in progress" link)
+	 * lands on the first tab that has a match, so the list is never empty on arrival.
+	 */
 	afterNavigate(({ to }) => {
 		const id = to?.url.searchParams.get('order');
 		const order = id ? shop.find(`#${id.replace(/^#/, '')}`) : undefined;
-		if (!order) return;
-		tab = order.status;
-		openOrder(order);
+		if (order) {
+			tab = order.status;
+			openOrder(order);
+			return;
+		}
+		if (to?.url.searchParams.get('q')) {
+			const first = tabs.find((t) => byTab[t].length > 0);
+			if (first) tab = first;
+		}
 	});
 </script>
 
@@ -95,7 +105,7 @@
 			{#each tabs as t (t)}
 				<Tabs.Trigger value={t} class="flex-none">
 					{t}
-					<span class="tabular-nums opacity-70">{byTab[t].length}</span>
+					<span class="tabular-nums">{byTab[t].length}</span>
 				</Tabs.Trigger>
 			{/each}
 		</Tabs.List>

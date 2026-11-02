@@ -7,12 +7,14 @@
 	import { palettes } from '#lib/theme/palettes.js';
 	import {
 		delivery,
+		extras,
 		formatLongDate,
 		formatMoney,
 		order,
 		orderSummary,
 		orderTotal,
 		plants,
+		roseVarieties,
 		shop,
 		stockTake
 	} from '#lib/demos/world.js';
@@ -535,8 +537,8 @@
 					<li>A stake, if the bed catches the wind off the river</li>
 				</Typography.List>
 				<Typography.P>
-					The till sells all four as one kit for $16.80. Ask for
-					<Typography.InlineCode>KIT-ROSE-2</Typography.InlineCode>.
+					The till sells all four as one kit for {formatMoney(extras.roseKit.price)}. Ask for
+					<Typography.InlineCode>{extras.roseKit.code}</Typography.InlineCode>.
 				</Typography.P>
 				<Typography.H2>Planting</Typography.H2>
 				<Typography.H4>Depth</Typography.H4>
@@ -560,30 +562,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>‘Gertrude Jekyll’</td>
-							<td>Shrub</td>
-							<td align="right">5 ft</td>
-							<td align="right">{formatMoney(rose.price)}</td>
-						</tr>
-						<tr>
-							<td>‘Albertine’</td>
-							<td>Rambler</td>
-							<td align="right">15 ft</td>
-							<td align="right">$22.00</td>
-						</tr>
-						<tr>
-							<td>‘Munstead Wood’</td>
-							<td>Shrub</td>
-							<td align="right">3 ft</td>
-							<td align="right">$26.75</td>
-						</tr>
-						<tr>
-							<td>‘The Generous Gardener’</td>
-							<td>Climber</td>
-							<td align="right">10 ft</td>
-							<td align="right">$25.40</td>
-						</tr>
+						{#each roseVarieties as variety (variety.name)}
+							<tr>
+								<td>{variety.name}</td>
+								<td>{variety.habit}</td>
+								<td align="right">{variety.height}</td>
+								<td align="right">{formatMoney(variety.price)}</td>
+							</tr>
+						{/each}
 					</tbody>
 				</Typography.Table>
 				<Typography.P>

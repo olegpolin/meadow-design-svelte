@@ -29,6 +29,7 @@
 	--ink: oklch(0.383 0.064 170.3);
 	--ink-soft: oklch(0.443 0.036 169.7);
 	--paper-deep: oklch(0.949 0.016 106.7);
+	--block-b-deep: oklch(0.62 0.1 305.1);
 }
 .dark {
 	--paper: oklch(0.947 0.034 110.6);
@@ -50,6 +51,7 @@
 	--ink: oklch(0.345 0.085 340);
 	--ink-soft: oklch(0.43 0.05 340);
 	--paper-deep: oklch(0.952 0.02 80);
+	--block-b-deep: oklch(0.62 0.1 140);
 }
 .dark[data-theme='orchard'] {
 	--paper: oklch(0.955 0.03 80);
@@ -71,6 +73,7 @@
 	--ink: oklch(0.34 0.06 235);
 	--ink-soft: oklch(0.43 0.04 235);
 	--paper-deep: oklch(0.952 0.012 220);
+	--block-b-deep: oklch(0.62 0.1 232);
 }
 .dark[data-theme='shore'] {
 	--paper: oklch(0.95 0.02 90);
@@ -92,6 +95,7 @@
 	--ink: oklch(0.33 0.045 50);
 	--ink-soft: oklch(0.43 0.03 50);
 	--paper-deep: oklch(0.948 0.018 70);
+	--block-b-deep: oklch(0.62 0.1 160);
 }
 .dark[data-theme='clay'] {
 	--paper: oklch(0.95 0.025 70);
@@ -127,9 +131,15 @@
 	--input: var(--ink);
 	--ring: var(--ink);
 	--overlay: color-mix(in oklab, var(--ink) 40%, transparent);
-	/* Light series, in contrast order on paper: ink, cool tint, soft ink, warm tint, deep paper. */
+	/*
+	 * Light series, in contrast order on paper: ink, deep cool, soft ink, warm
+	 * tint, deep paper. The first three are plotted and each clears 3:1 on
+	 * paper; chart-4 and chart-5 are swatches and the empty part of a track.
+	 * `--block-b-deep` is the cool tint pulled down to mid-tone so a bar in it
+	 * reads against paper; it exists only for this series.
+	 */
 	--chart-1: var(--ink);
-	--chart-2: var(--block-b);
+	--chart-2: var(--block-b-deep);
 	--chart-3: var(--ink-soft);
 	--chart-4: var(--block-a);
 	--chart-5: var(--paper-deep);
@@ -206,6 +216,10 @@
 	:where(& > :not(:last-child)) {
 		border-color: color-mix(in oklab, currentColor var(--hairline), transparent);
 	}
+}
+/* The same hairline as a fill, for 1px rules drawn with a background (separators, handles). */
+@utility bg-hairline {
+	background-color: color-mix(in oklab, currentColor var(--hairline), transparent);
 }
 
 @theme inline {

@@ -18,6 +18,7 @@ Meadow: a design system on top of shadcn-svelte, and a showcase site for it. War
 - **[Fontsource](https://fontsource.org)** - self-hosted variable fonts (Manrope, DM Sans)
 - **[mode-watcher](https://github.com/svecosystem/mode-watcher)** - light/dark mode and the named palette (`data-theme`)
 - **[LayerChart](https://www.layerchart.com)** (through the shadcn-svelte Chart) - charts
+- **[TanStack Table](https://tanstack.com/table)** (`@tanstack/svelte-table` v9, through the data-table component) - sorting, filtering, paging and selection for tables
 - **[svelte-sonner](https://svelte-sonner.vercel.app)**, **[vaul-svelte](https://vaul-svelte.com)**, **[paneforge](https://paneforge.dev)**, **[Embla Carousel](https://www.embla-carousel.com)**, **[formsnap](https://formsnap.dev)** + **[sveltekit-superforms](https://superforms.rocks)** with **[zod](https://zod.dev)** schemas, **[shiki](https://shiki.style)** - the libraries behind the toast, drawer, resizable, carousel, form and code-block components
 
 ## Using it in your own project

@@ -18,7 +18,6 @@ import type { BadgeVariant } from '#lib/components/ui/badge/index.js';
 
 /** Thursday, October 22, 2026. */
 export const TODAY = '2026-10-22';
-export const today = () => new Date(`${TODAY}T12:00:00`);
 
 const longDate = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 const shortDate = new Intl.DateTimeFormat('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
@@ -51,7 +50,11 @@ export const shop = {
 	hours: 'Tuesday to Sunday, 9:00 AM to 5:00 PM',
 	closedDays: ['Monday'],
 	/** Sales tax applied at the till. */
-	taxRate: 0.0625
+	taxRate: 0.0625,
+	/** Cash and card through the till so far today. */
+	tillToday: 1912.4,
+	/** Refunds above this need the owner's sign-off. */
+	refundSignOff: 50
 } as const;
 
 export const weather = {
@@ -122,7 +125,7 @@ export type Plant = {
 	/** Pot or form, e.g. "2 L pot". */
 	form: string;
 	price: number;
-	/** Units in stock today. 0 with `arrives` set means pre-order. */
+	/** Units in stock today. 0 is a pre-order when `arrives` is this year, otherwise sold out (see `stockState`). */
 	stock: number;
 	reserved: number;
 	location: string;
@@ -148,6 +151,22 @@ export const plants = {
 
 export const plantList: Plant[] = Object.values(plants);
 
+/** The bare-root roses on pre-order this winter, Gertrude Jekyll being the one in the plant list. */
+export const roseVarieties = [
+	{ name: '‘Gertrude Jekyll’', habit: 'Shrub', height: '5 ft', price: plants.rose.price },
+	{ name: '‘Albertine’', habit: 'Rambler', height: '15 ft', price: 22 },
+	{ name: '‘Munstead Wood’', habit: 'Shrub', height: '3 ft', price: 26.75 },
+	{ name: '‘The Generous Gardener’', habit: 'Climber', height: '10 ft', price: 25.4 }
+] as const;
+
+/** Trade break on bare-root roses: the unit price from this many roses. */
+export const roseTrade = { from: 24, each: 19.5 } as const;
+
+/** Add-ons sold at the till. */
+export const extras = {
+	giftWrap: { name: 'Gift wrap', price: 3.4 },
+	roseKit: { code: 'KIT-ROSE-2', name: 'Rose planting kit', price: 16.8 }
+} as const;
 /** "Low" is at or under 12 units; pre-orders are "Pre-order"; 0 with no date is "Sold out". */
 export type StockState = 'In stock' | 'Low' | 'Pre-order' | 'Sold out';
 export function stockState(plant: Plant): StockState {
@@ -172,7 +191,7 @@ export const delivery = {
 		{ id: 'pm', label: 'Afternoon', window: '1:00 PM to 4:30 PM' }
 	],
 	radiusMiles: 12,
-	/** Charged on orders under the threshold; free above it. */
+	/** Charged on orders under the threshold; free at the threshold and above. */
 	fee: 6.5,
 	freeOver: 60,
 	vans: [

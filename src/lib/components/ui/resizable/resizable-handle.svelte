@@ -20,7 +20,7 @@
 	bind:ref
 	data-slot="resizable-handle"
 	class={cn(
-		"relative flex w-px items-center justify-center bg-current outline-none",
+		"relative flex w-px items-center justify-center bg-hairline outline-none",
 		"after:absolute after:inset-y-0 after:left-1/2 after:w-3 after:-translate-x-1/2 after:rounded-full after:transition-[background-color,box-shadow] after:duration-150 hover:after:bg-current/10 data-[active=pointer]:after:bg-current/15",
 		"focus-visible:after:bg-current/10 focus-visible:after:ring-3 focus-visible:after:ring-ring/60",
 		"data-[direction=vertical]:h-px data-[direction=vertical]:w-full data-[direction=vertical]:after:left-0 data-[direction=vertical]:after:h-3 data-[direction=vertical]:after:w-full data-[direction=vertical]:after:translate-x-0 data-[direction=vertical]:after:-translate-y-1/2 data-[direction=vertical]:after:inset-y-auto data-[direction=vertical]:after:top-1/2",

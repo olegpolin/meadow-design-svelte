@@ -23,7 +23,7 @@
 	data-slot="checkbox"
 	class={cn(
 		"peer relative flex size-5 shrink-0 items-center justify-center rounded-xs border-[1.5px] border-current bg-transparent outline-none transition-[background-color,color,box-shadow] duration-150 after:absolute after:-inset-2.5 hover:data-unchecked:bg-current/10 focus-visible:ring-3 focus-visible:ring-ring/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:ring-offset-0",
-		"data-checked:bg-primary data-[state=indeterminate]:bg-primary",
+		"data-checked:bg-primary data-[state=indeterminate]:bg-primary [.bg-primary_&]:data-checked:bg-primary-foreground [.bg-primary_&]:data-[state=indeterminate]:bg-primary-foreground",
 		"aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/25",
 		className
 	)}
@@ -34,7 +34,7 @@
 	{#snippet children({ checked, indeterminate })}
 		<div
 			data-slot="checkbox-indicator"
-			class="grid place-content-center text-primary-foreground transition-none [&>svg]:size-3.5"
+			class="grid place-content-center text-primary-foreground transition-none [.bg-primary_&]:text-primary [&>svg]:size-3.5"
 		>
 			{#if checked}
 				<CheckIcon strokeWidth={3} />
